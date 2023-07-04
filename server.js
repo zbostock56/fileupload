@@ -33,8 +33,9 @@ app.post("/upload", function (req, res, next) {
             console.log("*** Unknown Error ***")
             console.log(err)
         } else {
+            console.log("Uploaded File: " + res.filename)
 			res.send("Success, Image uploaded!")
-            res.render("success")
+            
 		}
 	})
 })
