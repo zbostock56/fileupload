@@ -5,28 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload File</title>
+    <style>
+        body {
+            background-color: rgb(6, 26, 27);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+        }
+        .container h1 {
+            text-align: center;
+            color: white;
+        }
+        form {
+            background-color: white;
+            padding: 30px;
+        }
+        form .input-group {
+            margin-bottom: 15px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        form input {
+            padding: 12px 20px;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+        .submit-btn {
+            width: 100%;
+            border: none;
+            background: rgb(37, 83, 3);
+            font-size: 18px;
+            color: white;
+            border-radius: 3px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
     <body>
-        <h1>File upload</h1>
-        <form>
-            <input type="text" name="file-name" id="name">
-            <input type="file" name="file" id="files" multiple>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="container">
+            <h1>File upload</h1>
+            <form id = 'form'>
+                <label for="name">Enter a name for the file</label>
+                <input type="text" name="file-name" id="name">
+                <label for='files'>Select files</label>
+                <input type="file" name="file" id="files" multiple>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
         <script>
             const form = document.querySelector('form');
             form.addEventListener('submit', (e) => {
-                
                 e.preventDefault();
-                // Prevents HTML handling submission
+
                 const name = document.getElementById("name");
                 const files = document.getElementById("files");
                 const formData = new FormData();
                 console.log("Posting...")
-                // Creates empty formData object
+
                 formData.append("name", name.value);
-                // Appends value of text input
-                for(let i = 0; i < files.files.length; i++) {
+
+                for (let i = 0; i < files.files.length; i++) {
                     formData.append("files", files.files[i]);
                 }
                 // Appends value(s) of file input
@@ -37,6 +82,12 @@
                 })
                 .then(res => res.json())
                 .then(data => console.log(data));
+                
+                //fetch('http://localhost:3000/success', {
+                //    method: 'GET'
+                //})
+                //.then(res => res.json())
+                //.then(data => console.log(data))
             })
         </script>
     </body>
