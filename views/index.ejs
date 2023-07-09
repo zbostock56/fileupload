@@ -67,27 +67,23 @@
                 const name = document.getElementById("name");
                 const files = document.getElementById("files");
                 const formData = new FormData();
-                console.log("Posting...")
 
                 formData.append("name", name.value);
 
                 for (let i = 0; i < files.files.length; i++) {
                     formData.append("files", files.files[i]);
                 }
-                // Appends value(s) of file input
-                // Post data to Node and Express server:
-                fetch('http://127.0.0.1:3000/api', {
+
+                console.log("Posting...")
+                fetch('http://localhost:8000/', {
                     method: 'POST',
-                    body: formData, // Payload is formData object
+                    body: formData,
+                    mode: 'no-cors',
                 })
                 .then(res => res.json())
-                .then(data => console.log(data));
-                
-                //fetch('http://localhost:3000/success', {
-                //    method: 'GET'
-                //})
-                //.then(res => res.json())
-                //.then(data => console.log(data))
+                .catch((error) => {
+                  console.log(error)
+                });
             })
         </script>
     </body>
